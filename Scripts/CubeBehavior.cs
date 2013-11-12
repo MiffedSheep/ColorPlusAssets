@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CubeBehavior : MonoBehaviour {
 public int x,y;
-public bool Active;
+public bool Active,Black,Blue,Green,Red,Yellow,boomBool;
 private Cube cube;
 private GameController gameController;
 public GameObject aCube;
