@@ -5,12 +5,12 @@ public class CubeBehavior : MonoBehaviour {
 public int x,y;
 public bool Active;
 private Cube cube;
-private CubeBehavior cubeBehavior;
+private GameController gameController;
 public GameObject aCube;
 	// Use this for initialization
 	void Start () {
-		cubeBehavior = GameObject.Find ("aCube").GetComponent<CubeBehavior>();
-		cube = new Cube(cube.Active,cube.Black,cube.Blue,cube.Green,cube.Red,cube.Yellow,cube.locX,cube.locY);
+		gameController= GameObject.Find ("GameController").GetComponent<GameController>();
+	
 	}
 	
 	// Update is called once per frame

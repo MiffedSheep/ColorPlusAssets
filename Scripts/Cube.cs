@@ -6,9 +6,18 @@ public class Cube {
 	public int locX, locY;
 	private CubeBehavior cubeBehavior;
 	public GameObject aCube;
+	public GameObject[,] cubes;
 
 	// Use this for initialization
 	void Start () {
+	cubes = new GameObject[8, 5];
+	cubeBehavior = aCube.GetComponent<CubeBehavior> ();
+	for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 5; y++) {
+				cubes [x, y].GetComponent<CubeBehavior> ().x = x;
+				cubes [x, y].GetComponent<CubeBehavior> ().y = y;					
+			}		
+		}
 		
 	
 	}
