@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour {
 public int gridWidth = 8;
 public int gridHeight =5;
 public int colorCode,turnCount,randomInt,randomInt2;
+public bool onePerTurnBool;
 public string colorString;
 public float timer, timer2;
 public GameObject aCube;
@@ -14,7 +15,7 @@ private CubeBehavior cubeBehavior;
 private Cube cube;
 	// Use this for initialization
 	void Start () {
-	
+	colorCode= (Random.Range (1,5));
 	cubes = new GameObject [gridWidth, gridHeight];
 	nextCube= new GameObject[1];
 	nextCube[0]= (GameObject)Instantiate (aCube, new Vector3 (-7.022398f, 2.852758f,10),Quaternion.identity);		
@@ -32,6 +33,32 @@ private Cube cube;
 
 	// Update is called once per frame
 	void Update () {
+		/*Script that says:
+		 * 
+		 * for(int x = 0; x<gridWidth; x++){
+				for(int y = 0; y<gridHeight;y++){
+		 * if(*there are cubes in the postions +x/+y,+x/-y,-x/-y,-x/+y* of the same color){
+		 * points and grey and cube deactivation and yadda yadda
+		 * }
+		 *  
+		 * else if(*as seen above* and the surrounding cubes are one of the four colors it is not.
+		 * while being it's own color among the five.){
+		 * points and grey and cube deactivation and yadda yadda
+		 * }
+		 *  
+		 * else if(logic for the cubes being in a double cross){
+		 * cubes turn grey and you get more points
+		 * }
+		 * 
+		 * 
+		 * 		}
+		 * }
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 													*/
 		timer += Time.deltaTime;
 		timer2 += Time.deltaTime;
 		if(timer2>=60f){
@@ -76,16 +103,19 @@ private Cube cube;
 		  activeCubes[(Random.Range(0, numberOfActiveCubes)].boomBool=false;
 		}		
 		*/
+		onePerTurnBool = false;
 		timer=0;		
 			
 		}
 		
 		
 		
-	//Input Script	
-	if(Input.GetKeyDown (KeyCode.Keypad1)){
+	//Input Script	HEY I NEED HELP TURNING ALL OF THIS DIFFICULT GOBBLEYGOOK INTO A METHOD SO I CAN CODE EASILY
+
+		if(Input.GetKeyDown (KeyCode.Keypad1) && onePerTurnBool==false){
 			nextCube[0].renderer.enabled=false;
 			randomInt = Random.Range (0,8);
+			randomInt2 = Random.Range (0,8);
 			if(colorString=="Black"){
 				if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==false){
 					cubes[randomInt,0].renderer.material.color=Color.black;
@@ -94,6 +124,10 @@ private Cube cube;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,0].renderer.material.color=Color.black;
+					cubes[randomInt2,0].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Blue"){
@@ -104,6 +138,10 @@ private Cube cube;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,0].renderer.material.color=Color.black;
+					cubes[randomInt2,0].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Green"){
@@ -114,6 +152,10 @@ private Cube cube;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,0].renderer.material.color=Color.black;
+					cubes[randomInt2,0].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Red"){
@@ -124,6 +166,10 @@ private Cube cube;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,0].renderer.material.color=Color.black;
+					cubes[randomInt2,0].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Yellow"){
@@ -134,12 +180,17 @@ private Cube cube;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,0].renderer.material.color=Color.black;
+					cubes[randomInt2,0].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
+			onePerTurnBool=true;
 		}
 		
 	
-	if(Input.GetKeyDown (KeyCode.Keypad2)){
+	if(Input.GetKeyDown (KeyCode.Keypad2)&& onePerTurnBool==false){
 		nextCube[0].renderer.enabled=false;
 			randomInt = Random.Range (0,8);
 			if(colorString=="Black"){
@@ -149,7 +200,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,1].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,1].renderer.material.color=Color.black;
+					cubes[randomInt2,1].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Blue"){
@@ -159,7 +214,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,1].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,1].renderer.material.color=Color.black;
+					cubes[randomInt2,1].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Green"){
@@ -169,7 +228,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,1].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,1].renderer.material.color=Color.black;
+					cubes[randomInt2,1].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Red"){
@@ -179,7 +242,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,1].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,1].renderer.material.color=Color.black;
+					cubes[randomInt2,1].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Yellow"){
@@ -189,12 +256,16 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,1].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,1].renderer.material.color=Color.black;
+					cubes[randomInt2,1].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
-		
+			onePerTurnBool=true;		
 		}
-	if(Input.GetKeyDown (KeyCode.Keypad3)){
+	if(Input.GetKeyDown (KeyCode.Keypad3)&& onePerTurnBool==false){
 			nextCube[0].renderer.enabled=false;
 			randomInt = Random.Range (0,8);
 			if(colorString=="Black"){
@@ -204,7 +275,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,2].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,2].renderer.material.color=Color.black;
+					cubes[randomInt2,2].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			
@@ -215,7 +290,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,2].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,2].renderer.material.color=Color.black;
+					cubes[randomInt2,2].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Green"){
@@ -225,7 +304,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,2].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,2].renderer.material.color=Color.black;
+					cubes[randomInt2,2].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Red"){
@@ -235,7 +318,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,2].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,2].renderer.material.color=Color.black;
+					cubes[randomInt2,2].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Yellow"){
@@ -245,11 +332,16 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,2].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,2].renderer.material.color=Color.black;
+					cubes[randomInt2,2].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
+			onePerTurnBool=true;
 		}
-	if(Input.GetKeyDown (KeyCode.Keypad4)){
+	if(Input.GetKeyDown (KeyCode.Keypad4)&& onePerTurnBool==false){
 			nextCube[0].renderer.enabled=false;
 			randomInt = Random.Range (0,8);
 			if(colorString=="Black"){
@@ -259,7 +351,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,3].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,3].renderer.material.color=Color.black;
+					cubes[randomInt2,3].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Blue"){
@@ -269,7 +365,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,3].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,3].renderer.material.color=Color.black;
+					cubes[randomInt2,3].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Green"){
@@ -279,7 +379,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,3].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,3].renderer.material.color=Color.black;
+					cubes[randomInt2,3].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Red"){
@@ -289,7 +393,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,3].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,3].renderer.material.color=Color.black;
+					cubes[randomInt2,3].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Yellow"){
@@ -299,11 +407,16 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,3].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,3].renderer.material.color=Color.black;
+					cubes[randomInt2,3].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
+			onePerTurnBool=true;
 		}
-	if(Input.GetKeyDown (KeyCode.Keypad5)){
+	if(Input.GetKeyDown (KeyCode.Keypad5)&& onePerTurnBool==false){
 			randomInt = Random.Range (0,8);
 			if(colorString=="Black"){
 				if(cubes[randomInt,4].GetComponent<CubeBehavior>().Active==false){
@@ -312,7 +425,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,4].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,4].renderer.material.color=Color.black;
+					cubes[randomInt2,4].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Blue"){
@@ -322,7 +439,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,4].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,4].renderer.material.color=Color.black;
+					cubes[randomInt2,4].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Green"){
@@ -332,7 +453,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,4].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,4].renderer.material.color=Color.black;
+					cubes[randomInt2,4].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Red"){
@@ -342,7 +467,11 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,4].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,4].renderer.material.color=Color.black;
+					cubes[randomInt2,4].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
 			else if(colorString=="Yellow"){
@@ -352,11 +481,18 @@ private Cube cube;
 					nextCube[0].renderer.enabled=false;
 					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
-				else if(cubes[randomInt,0].GetComponent<CubeBehavior>().Active==true){
+				else if(cubes[randomInt,4].GetComponent<CubeBehavior>().Active==true){
+					cubes[randomInt2,4].renderer.material.color=Color.black;
+					cubes[randomInt2,4].GetComponent<CubeBehavior>().Active=true;
+					nextCube[0].renderer.enabled=false;
+					nextCube[0].GetComponent<CubeBehavior>().boomBool=true;
 				}
 			}
+			onePerTurnBool=true;
 		}
-	}
+	
+	
+}
 	void OnMouseDown(){
 		
 	}
