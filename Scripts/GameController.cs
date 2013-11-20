@@ -76,49 +76,7 @@ public class GameController : MonoBehaviour
 				}
 		return true;
 	}
-/*	private bool CheckForPreviousCubeX(int x, int y){
-		//int x2 = cubes[x,y].GetComponent<CubeBehavior>().x;
-		//int y2 = cubes[x,y].GetComponent<CubeBehavior>().y; 
-		
-		x2 = x;
-		y2 = y;
-		
-		//int previousCubeX = cubes[x2,y2].GetComponent<CubeBehavior>().x;
-		if((cubes[x2+1,y2].GetComponent<CubeBehavior>().ActiveAndInput |
-			cubes[x2-1,y2].GetComponent<CubeBehavior>().ActiveAndInput |
-			cubes[x2,y2+1].GetComponent<CubeBehavior>().ActiveAndInput |
-			cubes[x2,y2-1].GetComponent<CubeBehavior>().ActiveAndInput |
-			cubes[x2-1,y2-1].GetComponent<CubeBehavior>().ActiveAndInput |
-			cubes[x2+1,y2-1].GetComponent<CubeBehavior>().ActiveAndInput |
-			cubes[x2+1,y2+1].GetComponent<CubeBehavior>().ActiveAndInput |
-			cubes[x2-1,y2+1].GetComponent<CubeBehavior>().ActiveAndInput) &&
-			cubes[x2,y2].GetComponent<CubeBehavior>().Active)
-		{
-			
-			//previousCubeX = x;
-			return true;	
-		}
-	
-	}
-	private int CheckForPreviousCubeY(int y){
-		int previousCubeY = cubes[x,y].GetComponent<CubeBehavior>().y;
-		if((cubes[x+1,y].GetComponent<CubeBehavior>().ActiveAndInput |
-				 cubes[x-1,y].GetComponent<CubeBehavior>().ActiveAndInput |
-				 cubes[x,y+1].GetComponent<CubeBehavior>().ActiveAndInput |
-				 cubes[x,y-1].GetComponent<CubeBehavior>().ActiveAndInput |
-				 cubes[x-1,y-1].GetComponent<CubeBehavior>().ActiveAndInput |
-				 cubes[x+1,y-1].GetComponent<CubeBehavior>().ActiveAndInput |
-				 cubes[x+1,y+1].GetComponent<CubeBehavior>().ActiveAndInput |
-				 cubes[x-1,y+1].GetComponent<CubeBehavior>().ActiveAndInput) &&
-			 	 cubes[x,y].GetComponent<CubeBehavior>().Active)
-				{
-			
-			//previousCubeY = y;
-			return previousCubeY;
-		}
-			
-	}
-	*/
+
 	private void CheckScore(){
 		
 		// Check every cube in the grid

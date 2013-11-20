@@ -29,8 +29,8 @@ public class CubeBehavior : MonoBehaviour
 	{
 		if (this.gameObject.GetComponent<CubeBehavior> ().ActiveAndInput == false && this.gameObject.GetComponent<CubeBehavior> ().Active == true) {
 			
-			for (int x2 = 0; x2<8; x2++) {
-				for (int y2 = 0; y2<5; y2++) {	
+			for (int x2 = 1; x2<8-1; x2++) {
+				for (int y2 = 1; y2<5-1; y2++) {	
 					gameController.cubes [x2, y2].GetComponent <CubeBehavior> ().ActiveAndInput = false;
 					gameController.DirectionalLightArray [x2, y2].light.enabled = false;
 					
